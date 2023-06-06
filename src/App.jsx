@@ -83,196 +83,202 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <>
       <h1>Task Manager</h1>
+      <div className="app">
 
-      <div className="quadrant-container">
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="quadrant1">
-            {(provided) => (
-              <div
-                className="quadrant"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <h2>Urget but Not Important</h2>
-                {tasks.map((task, index) => {
-                  if (task.quadrant === 'quadrant1') {
-                    return (
-                      <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            className="task"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
-                              ...provided.draggableProps.style
-                            }}
-                          >
-                            <div>{task.title}</div>
-                            <button className="delete-button" onClick={() => deleteTask(task.id)}>
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
-                  return null;
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+        <div className="quadrant-container">
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="quadrant1">
+              {(provided) => (
+                <div
+                  className="quadrant"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{backgroundColor: "#cc3300"}}
+                >
+                  <h2>Urgent but Not Important</h2>
+                  {tasks.map((task, index) => {
+                    if (task.quadrant === 'quadrant1') {
+                      return (
+                        <Draggable key={task.id} draggableId={task.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              className="task"
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
+                                ...provided.draggableProps.style
+                              }}
+                            >
+                              <div>{task.title}</div>
+                              <button className="delete-button" onClick={() => deleteTask(task.id)}>
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
 
-          <Droppable droppableId="quadrant2">
-            {(provided) => (
-              <div
-                className="quadrant"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <h2>Urgent and Important</h2>
-                {tasks.map((task, index) => {
-                  if (task.quadrant === 'quadrant2') {
-                    return (
-                      <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            className="task"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
-                              ...provided.draggableProps.style
-                            }}
-                          >
-                            <div>{task.title}</div>
-                            <button className="delete-button" onClick={() => deleteTask(task.id)}>
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
-                  return null;
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          <Droppable droppableId="quadrant3">
-            {(provided) => (
-              <div
-                className="quadrant"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <h2>Not Urgent and Not Important</h2>
-                {tasks.map((task, index) => {
-                  if (task.quadrant === 'quadrant3') {
-                    return (
-                      <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            className="task"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
-                              ...provided.draggableProps.style
-                            }}
-                          >
-                            <div>{task.title}</div>
-                            <button className="delete-button" onClick={() => deleteTask(task.id)}>
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
-                  return null;
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          <Droppable droppableId="quadrant4">
-            {(provided) => (
-              <div
-                className="quadrant"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <h2>Not Urgent But Important</h2>
-                {tasks.map((task, index) => {
-                  if (task.quadrant === 'quadrant4') {
-                    return (
-                      <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            className="task"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
-                              ...provided.draggableProps.style
-                            }}
-                          >
-                            <div>{task.title}</div>
-                            <button className="delete-button" onClick={() => deleteTask(task.id)}>
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
-                  return null;
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+            <Droppable droppableId="quadrant2">
+              {(provided) => (
+                <div
+                  className="quadrant"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{backgroundColor: "#669900"}}
+                >
+                  <h2>Urgent and Important</h2>
+                  {tasks.map((task, index) => {
+                    if (task.quadrant === 'quadrant2') {
+                      return (
+                        <Draggable key={task.id} draggableId={task.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              className="task"
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
+                                ...provided.draggableProps.style
+                              }}
+                            >
+                              <div>{task.title}</div>
+                              <button className="delete-button" onClick={() => deleteTask(task.id)}>
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+            <Droppable droppableId="quadrant3">
+              {(provided) => (
+                <div
+                  className="quadrant"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{backgroundColor: "#66ccff"}}
+                >
+                  <h2>Not Urgent and Not Important</h2>
+                  {tasks.map((task, index) => {
+                    if (task.quadrant === 'quadrant3') {
+                      return (
+                        <Draggable key={task.id} draggableId={task.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              className="task"
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
+                                ...provided.draggableProps.style
+                              }}
+                            >
+                              <div>{task.title}</div>
+                              <button className="delete-button" onClick={() => deleteTask(task.id)}>
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+            <Droppable droppableId="quadrant4">
+              {(provided) => (
+                <div
+                  className="quadrant"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{backgroundColor: "#993399"}}
+                >
+                  <h2>Not Urgent But Important</h2>
+                  {tasks.map((task, index) => {
+                    if (task.quadrant === 'quadrant4') {
+                      return (
+                        <Draggable key={task.id} draggableId={task.id} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              className="task"
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                backgroundColor: snapshot.isDragging ? 'lightblue' : 'white',
+                                ...provided.draggableProps.style
+                              }}
+                            >
+                              <div>{task.title}</div>
+                              <button className="delete-button" onClick={() => deleteTask(task.id)}>
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
+
+        <div className="task-form">
+          <h2>Create a Task</h2>
+          <input
+            type="text"
+            placeholder="  Task Title"
+            value={newTaskTitle}
+            onChange={(e) => setNewTaskTitle(e.target.value)}
+          />
+          <label htmlFor='taskUrgency'>Urgency:</label>
+          <select
+            id="taskUrgency"
+            value={newTaskUrgency}
+            onChange={(e) => setNewTaskUrgency(e.target.value)}
+          >
+            <option value="high">High</option>
+            <option value="low">Low</option>
+          </select>
+          <label htmlFor='taskImportance'>Importance:</label>
+          <select
+            id="taskImportance"
+            value={newTaskImportance}
+            onChange={(e) => setNewTaskImportance(e.target.value)}
+          >
+            <option value="high">High</option>
+            <option value="low">Low</option>
+          </select>
+          <button onClick={createTask}>Create</button>
+        </div>
       </div>
-
-      <div className="task-form">
-        <h2>Create a Task</h2>
-        <input
-          type="text"
-          placeholder="Title"
-          value={newTaskTitle}
-          onChange={(e) => setNewTaskTitle(e.target.value)}
-        />
-        <label htmlFor='taskUrgency'>Urgency:</label>
-        <select
-          id="taskUrgency"
-          value={newTaskUrgency}
-          onChange={(e) => setNewTaskUrgency(e.target.value)}
-        >
-          <option value="high">High</option>
-          <option value="low">Low</option>
-        </select>
-        <label htmlFor='taskImportance'>Importance:</label>
-        <select
-          id="taskImportance"
-          value={newTaskImportance}
-          onChange={(e) => setNewTaskImportance(e.target.value)}
-        >
-          <option value="high">High</option>
-          <option value="low">Low</option>
-        </select>
-        <button onClick={createTask}>Create</button>
-      </div>
-    </div>
+    </>
   );
 };
 
