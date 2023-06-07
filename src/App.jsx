@@ -47,8 +47,7 @@ const App = () => {
   const createTask = () => {
     if (!newTaskTitle) return;
 
-    let quadrant = 'quadrant1'
-
+    let quadrant
     if (newTaskUrgency === 'high') {
       if (newTaskImportance === 'high') {
         quadrant = 'quadrant2'
@@ -68,7 +67,8 @@ const App = () => {
       title: newTaskTitle,
       urgency: newTaskUrgency,
       importance: newTaskImportance,
-      quadrant
+      quadrant,
+      done: false
     };
 
     setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -81,6 +81,17 @@ const App = () => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
   };
+
+  const markTaskAsDone = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(prev => prev.map(t => {
+      if (t.id === taskId) {
+        return {...t, done: true}
+      } else {
+        return t
+      }
+    }));
+  }
 
   return (
     <>
@@ -95,7 +106,7 @@ const App = () => {
                   className="quadrant"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  style={{backgroundColor: "#cc3300"}}
+                  style={{ backgroundColor: "#cc3300" }}
                 >
                   <h2>Urgent but Not Important</h2>
                   {tasks.map((task, index) => {
@@ -113,7 +124,11 @@ const App = () => {
                                 ...provided.draggableProps.style
                               }}
                             >
-                              <div>{task.title}</div>
+                              <div className={task.done ? "done-task" : ""}>{task.title}</div>
+                              {!task.done && (
+                                <button className="done-button" onClick={() => markTaskAsDone(task.id)}>
+                                  Done
+                                </button>)}
                               <button className="delete-button" onClick={() => deleteTask(task.id)}>
                                 Delete
                               </button>
@@ -135,7 +150,7 @@ const App = () => {
                   className="quadrant"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  style={{backgroundColor: "#669900"}}
+                  style={{ backgroundColor: "#669900" }}
                 >
                   <h2>Urgent and Important</h2>
                   {tasks.map((task, index) => {
@@ -153,7 +168,11 @@ const App = () => {
                                 ...provided.draggableProps.style
                               }}
                             >
-                              <div>{task.title}</div>
+                              <div className={task.done ? "done-task" : ""}>{task.title}</div>
+                              {!task.done && (
+                                <button className="done-button" onClick={() => markTaskAsDone(task.id)}>
+                                  Done
+                                </button>)}
                               <button className="delete-button" onClick={() => deleteTask(task.id)}>
                                 Delete
                               </button>
@@ -174,7 +193,7 @@ const App = () => {
                   className="quadrant"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  style={{backgroundColor: "#66ccff"}}
+                  style={{ backgroundColor: "#66ccff" }}
                 >
                   <h2>Not Urgent and Not Important</h2>
                   {tasks.map((task, index) => {
@@ -192,7 +211,11 @@ const App = () => {
                                 ...provided.draggableProps.style
                               }}
                             >
-                              <div>{task.title}</div>
+                              <div className={task.done ? "done-task" : ""}>{task.title}</div>
+                              {!task.done && (
+                                <button className="done-button" onClick={() => markTaskAsDone(task.id)}>
+                                  Done
+                                </button>)}
                               <button className="delete-button" onClick={() => deleteTask(task.id)}>
                                 Delete
                               </button>
@@ -213,7 +236,7 @@ const App = () => {
                   className="quadrant"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  style={{backgroundColor: "#993399"}}
+                  style={{ backgroundColor: "#993399" }}
                 >
                   <h2>Not Urgent But Important</h2>
                   {tasks.map((task, index) => {
@@ -231,7 +254,11 @@ const App = () => {
                                 ...provided.draggableProps.style
                               }}
                             >
-                              <div>{task.title}</div>
+                              <div className={task.done ? "done-task" : ""}>{task.title}</div>
+                              {!task.done && (
+                                <button className="done-button" onClick={() => markTaskAsDone(task.id)}>
+                                  Done
+                                </button>)}
                               <button className="delete-button" onClick={() => deleteTask(task.id)}>
                                 Delete
                               </button>
